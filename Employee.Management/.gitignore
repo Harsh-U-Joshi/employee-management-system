@@ -1,0 +1,79 @@
+# Ignore build outputs
+bin/
+obj/
+*.dll
+*.pdb
+*.exe
+*.app
+*.so
+*.dylib
+*.db
+*.core
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vscode/
+.idea/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+*.pid
+*.seed
+*.bak
+
+# ASP.NET Core specific
+appsettings.Development.json
+appsettings.Local.json
+appsettings.*.json
+
+# Publish output
+wwwroot/
+node_modules/
+dist/
+build/
+bower_components/
+
+# Entity Framework Core
+*.edmx
+*.designer.cs
+*.dbml
+*.dbschema
+*.sql
+
+# Resharper
+_ReSharper*/
+*.DotSettings.user
+
+# Rider
+.idea/
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.psess
+*.vspx
+TestResults/
+ServiceFabricBackup/
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+
+# Others
+*.DS_Store
+Thumbs.db
+Desktop.ini

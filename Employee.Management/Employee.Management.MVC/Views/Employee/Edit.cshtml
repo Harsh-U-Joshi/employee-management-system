@@ -1,0 +1,140 @@
+﻿@using Employee.Management.MVC.Utitlies
+@model Employee.Management.MVC.Models.Employee.UpdateEmployeeViewModel
+
+@{
+    ViewData["Title"] = "Update Employee";
+}
+
+<h1>Update Employee</h1>
+
+<hr />
+
+@if (ViewBag.ErrorMessage is not null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+@using (Html.BeginForm("UpdateEmployee", "Employee", FormMethod.Post))
+{
+    <div class="col-md-10 col-md-offset-1">
+        <table class="table table-bordered">
+            <tbody>
+                <input type="hidden" asp-for="EmployeeId" />
+
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.FirstName)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "Enter employee first name" })
+                        @Html.ValidationMessageFor(m => m.FirstName, null, new { @class = "text-danger" })
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.MiddleName)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control", @placeholder = "Enter employee middle name" })
+                        @Html.ValidationMessageFor(m => m.MiddleName, null, new { @class = "text-danger" })
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.LastName)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Enter employee last name" })
+                        @Html.ValidationMessageFor(m => m.LastName, null, new { @class = "text-danger" })
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.DateOfBirth)
+                    </td>
+                    <td>
+                        @Html.EditorFor(m => m.DateOfBirth, new { @class = "form-control", @placeholder = "Enter employee DOB" })
+                        @Html.ValidationMessageFor(m => m.DateOfBirth, null, new { @class = "text-danger" })
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.Gender)
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(
+                                 m => m.Gender,
+                                 new SelectList(Enum.GetValues(typeof(Gender))),
+                                 "-- Select Gender --",
+                                 new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Gender, null, new { @class = "text-danger" })
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.Status)
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(
+                                 m => m.Status,
+                                 new SelectList(Enum.GetValues(typeof(EmployeeStatus))),
+                                 "-- Select Status --",
+                                 new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Status, null, new { @class = "text-danger" })
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.DepartmentId)
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(
+                                 m => m.DepartmentId,
+                                 (SelectList)ViewBag.Departments,
+                                 "-- Select Department --",
+                                 new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.DepartmentId, null, new { @class = "text-danger" })
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.PositionId)
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(
+                                 m => m.PositionId,
+                                 (SelectList)ViewBag.Positions,
+                                 "-- Select Posiiton --",
+                                 new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.PositionId, null, new { @class = "text-danger" })
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="submit" value="Update" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

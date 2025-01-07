@@ -1,0 +1,108 @@
+﻿@model Employee.Management.MVC.Models.Auth.RegisterUserRequest
+
+@{
+    ViewData["Title"] = "Create New User";
+}
+
+<h4>Sign Up</h4>
+
+<hr />
+
+@if (ViewBag.ErrorMessage is not null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+@using (Html.BeginForm("Register", "Auth", FormMethod.Post))
+{
+    <div class="col-md-10 col-md-offset-1">
+        <!--This table contains the fields that we want to capture to register a new user-->
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.FirstName)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "Enter your first name" })
+                        @Html.ValidationMessageFor(m => m.FirstName, null, new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.LastName)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Enter your last name" })
+                        @Html.ValidationMessageFor(m => m.LastName, null, new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.UserName)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Enter your user name" })
+                        @Html.ValidationMessageFor(m => m.UserName, null, new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.Email)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Enter your email" })
+                        @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.Password)
+                    </td>
+                    <td>
+                        <div class="input-group">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @id = "passwordInput", @placeholder = "Enter your password" })
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" id="togglePassword" onclick="togglePasswordVisibility()">
+                                    <i class="bi bi-eye" id="eyeIcon"></i>
+                                </button>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" })
+                        </div>
+                    </td>
+                </tr>
+
+                <tr class="success">
+                    <td colspan="2">
+                        <button type="submit" class="btn btn-success">Sign Up</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+        <script>
+            function togglePasswordVisibility() {
+                var passwordInput = document.getElementById("passwordInput");
+                var eyeIcon = document.getElementById("eyeIcon");
+
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text";  // Show password
+                    eyeIcon.classList.remove("bi-eye"); // Remove the 'eye' icon
+                    eyeIcon.classList.add("bi-eye-slash"); // Add 'eye-slash' icon (closed eye)
+                } else {
+                    passwordInput.type = "password"; // Hide password
+                    eyeIcon.classList.remove("bi-eye-slash"); // Remove the 'eye-slash' icon
+                    eyeIcon.classList.add("bi-eye"); // Add 'eye' icon (open eye)
+                }
+            }
+        </script>
+    }
+}
